@@ -154,7 +154,6 @@ public class StudentAuthenticationPasswordChangeAccountConfirmPanel extends JPan
 								 studentUsernameField.getText(),
 									studentPasswordField.getPassword(), 1, 
 									studentSecurityAnswerField.getText()) ) {
-					System.out.println("true hehe");
 					clickListener.clickedNum(-1);		
 				}
 				else {
