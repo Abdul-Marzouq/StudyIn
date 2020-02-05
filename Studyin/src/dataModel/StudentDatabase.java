@@ -55,7 +55,7 @@ public class StudentDatabase {
 	public void load() throws Exception{
 		
 		StudentList.clear();
-		String checksql = "select Student_ID, Name, Age, Username, Password from Student order by Student_ID";
+		String checksql = "select Student_ID, Name, Age, Username, Password, CNF_No, Account_Status from Student order by Student_ID";
 		connect();
 		if(con != null) {
 			Statement selstmt = con.createStatement();
@@ -68,8 +68,14 @@ public class StudentDatabase {
 				String age = result.getString("Age");
 				String username = result.getString("Username");
 				String password = result.getString("Password");
-			
-				Student student = new Student(id,name,age,username,password);
+				int cnfno = result.getInt("CNF_No");
+				String stat = result.getString("Account_Status");
+				boolean st;
+				if(stat.equals("y"))
+					st = true;
+				else
+					st = false;
+				Student student = new Student(id,name,age,username,password,cnfno,st);
 				StudentList.add(student);
 			}
 			selstmt.close();
@@ -77,7 +83,7 @@ public class StudentDatabase {
 	}		
 	
 	public void insert(Student newStudent) throws SQLException {
-		String insertsql = "insert into Student values(?, ?, ?, ?, ?)";
+		String insertsql = "insert into Student values(?, ?, ?, ?, ?, ?)";
 		PreparedStatement insstmt = con.prepareStatement(insertsql);
 		int col = 1;
 		insstmt.setInt(col++, newStudent.getStudentId());
@@ -85,6 +91,7 @@ public class StudentDatabase {
 		insstmt.setString(col++, newStudent.getStudentAge());
 		insstmt.setString(col++, newStudent.getStudentUsername());
 		insstmt.setString(col++, newStudent.getStudentName() + newStudent.getStudentAge());
+		insstmt.setInt(col++, newStudent.getCnfno());
 		insstmt.executeUpdate();
 		insstmt.close();
 	}
@@ -125,17 +132,20 @@ public class StudentDatabase {
 		return null;
 	}
 	
-	public void updateStudentSecurityInfo(int sq_id, String uName,String pwd,int sq_no,String sq_ans) throws SQLException {
-		String updatesql = "update Student set Username = ?,Password = ?,SQ_No = ?, SQ_Answer = ? where Student_ID = ?";
+	public boolean updateStudentSecurityInfo(int sq_id, String uName,String pwd,int sq_no,String sq_ans) throws SQLException {
+		String updatesql = "update Student set Username = ?,Password = ?,SQ_No = ?, SQ_Answer = ?, Account_Status = ? where Student_ID = ?";
+		System.out.println("pass");
 		PreparedStatement updstmt = con.prepareStatement(updatesql);
 		int col = 1;
 		updstmt.setString(col++, uName);
 		updstmt.setString(col++, pwd);
 		updstmt.setInt(col++, sq_no);
 		updstmt.setString(col++, sq_ans);
+		updstmt.setString(col++, "y");
 		updstmt.setInt(col++, sq_id);
 		updstmt.executeUpdate();
 		updstmt.close();
+		return true;
 	}
 	
 	public void updateStudentbyID(int id, String name, String age) throws SQLException {
@@ -160,15 +170,6 @@ public class StudentDatabase {
 			return 0;
 		else
 			return StudentList.get(StudentList.size()-1).getStudentId();
-	}
-	
-	public void setStudentPassword(int id,String uName,String pword,int sqno,String ans) throws SQLException {
-		Student st = getStudentbyID(id);
-		st.setStudentUsername(uName);
-		st.setPassword(pword);
-		st.setSQ_Answer(ans);
-		st.setSQ_No(sqno);
-		updateStudentSecurityInfo(id,uName,pword,sqno,ans);
 	}
 	
 	public boolean cnfNoCheck(int id,String name,int cnfNo) {

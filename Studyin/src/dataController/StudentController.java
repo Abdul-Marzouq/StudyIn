@@ -43,18 +43,18 @@ public class StudentController {
 	public boolean signupconfirm(int id, String name,int cnf) {
 		return db.cnfNoCheck(id, name, cnf);
 	}
+
 	
-	public void signup(int id,String uName,String pwd,int sqno,String ans) {
+	public boolean setpassword(int id,String uName,char[] pwd,int sqno,String ans) {
 		try {
-			db.setStudentPassword(id, uName, pwd, sqno, ans);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public boolean updpwd(int id,String uName,String pwd,int sqno,String ans) {
-		try {
-			return db.updatePassword(id,uName,pwd,sqno,ans);
+			String passwd = new String(pwd);
+			Student st = db.getStudentbyID(id);
+			System.out.println(passwd);
+			if(st.isAccount_Status() == true)
+				return db.updatePassword(id,uName,passwd,sqno,ans);
+			else
+				return db.updateStudentSecurityInfo(id,uName,passwd,sqno,ans);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

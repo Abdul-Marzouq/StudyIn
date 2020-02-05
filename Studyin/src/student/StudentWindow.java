@@ -24,7 +24,7 @@ public class StudentWindow extends JFrame{
 			setLayout(new BorderLayout());
 			studentController = new StudentController(true);
 			
-			sad = new StudentAuthenticationDialog(this);
+			sad = new StudentAuthenticationDialog(this,studentController);
 			sad.setVisible(true);
 			sad.addWindowListener(new java.awt.event.WindowAdapter() {
 			    public void windowClosing(java.awt.event.WindowEvent windowEvent) {

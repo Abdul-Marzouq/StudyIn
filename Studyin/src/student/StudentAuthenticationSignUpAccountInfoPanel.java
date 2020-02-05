@@ -3,6 +3,9 @@ package student;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -11,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import dataController.StudentController;
+import events.ClickListener;
 
 public class StudentAuthenticationSignUpAccountInfoPanel extends JPanel{
 
@@ -26,8 +32,11 @@ public class StudentAuthenticationSignUpAccountInfoPanel extends JPanel{
 	private JTextField studentSecurityAnswerField;
 	private JLabel invalidDataLabel;
 	private JButton createAccountButton;
+	private StudentController studentController;
+	private int id;
+	private ClickListener clickListener;
 	
-	public StudentAuthenticationSignUpAccountInfoPanel() {
+	public StudentAuthenticationSignUpAccountInfoPanel(StudentController controller) {
 		
 		setVisible(true);
 		setLayout(new GridBagLayout());
@@ -36,16 +45,16 @@ public class StudentAuthenticationSignUpAccountInfoPanel extends JPanel{
 		studentUsernameLabel = new JLabel("Account Username: ");
 		studentUsernameField = new JTextField(10);
 		studentPasswordLabel = new JLabel("New Password: ");
-		studentPasswordField = new JPasswordField(8);
+		studentPasswordField = new JPasswordField(10);
 		studentConfirmPasswordLabel = new JLabel("Confirm Password: ");
-		studentConfirmPasswordField = new JPasswordField(8);
+		studentConfirmPasswordField = new JPasswordField(10);
 		studentSecurityQuestionLabel = new JLabel("Security Question: ");
 		studentSecurityQuestionBox = new JComboBox();
 		studentSecurityAnswerLabel = new JLabel("Answer: ");
 		studentSecurityAnswerField = new JTextField(10);
-		invalidDataLabel = new JLabel("Invalid Data!");
+		invalidDataLabel = new JLabel(" ");
 		createAccountButton  = new JButton("Create Account");
-		
+		studentController = controller;
 
 		DefaultComboBoxModel securityQuestionModel = new DefaultComboBoxModel();
 		securityQuestionModel.addElement("What is the name of your first teacher?");
@@ -116,6 +125,26 @@ public class StudentAuthenticationSignUpAccountInfoPanel extends JPanel{
 		gc.gridy = 8;
 		gc.anchor = GridBagConstraints.SOUTHEAST;
 		add(createAccountButton, gc);
+	
+		createAccountButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				if(Arrays.equals(studentPasswordField.getPassword(),studentConfirmPasswordField.getPassword()) 
+						&& studentController.setpassword(id, studentUsernameField.getText(),
+								studentPasswordField.getPassword(), 1, 
+								studentSecurityAnswerField.getText()) )	
+					clickListener.clickedNum(-1);
+				else { 
+					invalidDataLabel.setText("Invalid Data!");
+				}
+			}	
+		}); }
+	
+	public void setid(int id) {
+		this.id = id;
 	}
 	
+	public void setClickListener(ClickListener listener) {
+		this.clickListener = listener;
+	}
 }

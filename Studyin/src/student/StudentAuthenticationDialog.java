@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import dataController.StudentController;
 import events.ClickListener;
 
 public class StudentAuthenticationDialog extends JDialog implements ActionListener{
@@ -29,10 +30,12 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 	private StudentAuthenticationSignUpDialog sasupd;
 	private StudentAuthenticationPasswordChangeDialog sapcd;
 	private ClickListener clickListener;
+	private StudentController scontroller;
 
-	public StudentAuthenticationDialog(JFrame parent) {
+	public StudentAuthenticationDialog(JFrame parent,StudentController controller) {
 
 		super(parent, "Student Authentication Panel", false);
+		scontroller = controller;
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		userNameLabel = new JLabel("Account User Name: ");
@@ -110,7 +113,7 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 			sapcd = new StudentAuthenticationPasswordChangeDialog(this);
 		}
 		else if(clicked == studentSignUpButton) {
-			sasupd = new StudentAuthenticationSignUpDialog(this);
+			sasupd = new StudentAuthenticationSignUpDialog(this,scontroller);
 		}
 		else if(clicked == studentSignInButton) {
 			System.out.println("Sign In");

@@ -12,6 +12,7 @@ public class Student {
 	private String StudentPassword;
 	private int SQ_No;
 	private String SQ_Answer;
+	private boolean Account_Status;
 	private int cnfno;
 	
 	
@@ -21,6 +22,14 @@ public class Student {
 
 	public void setCnfno(int cnfno) {
 		this.cnfno = cnfno;
+	}
+
+	public boolean isAccount_Status() {
+		return Account_Status;
+	}
+
+	public void setAccount_Status(boolean account_Status) {
+		Account_Status = account_Status;
 	}
 
 	public int getSQ_No() {
@@ -49,13 +58,14 @@ public class Student {
 		this.cnfno = rand.nextInt(1000);
 	}
 	
-	public Student(int id,String name, String age, String username,String password) {
-		Random rand = new Random();
+	public Student(int id,String name, String age, String username,String password,int cnfno,boolean stat) {
 		this.StudentId = id;
 		this.StudentAge = age;
 		this.StudentName = name;
 		this.StudentUsername = username;
 		this.StudentPassword = password;
+		this.cnfno = cnfno;
+		this.Account_Status = stat;
 	}
 	
 	public Student() {

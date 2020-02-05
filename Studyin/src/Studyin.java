@@ -13,14 +13,14 @@ public class Studyin {
 		
 				LaunchWindow lw = new LaunchWindow();
 				lw.setVisible(true);
-				StudentAuthenticationDialog sad = new StudentAuthenticationDialog(lw);
+				/*StudentAuthenticationDialog sad = new StudentAuthenticationDialog(lw);
 				sad.setVisible(false);
 				sad.addWindowListener(new java.awt.event.WindowAdapter() {
 				    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
 				        	//lw.disconnect();
 				            System.exit(0);
 				        }
-				});
+				});*/
 				
 			}			
 		});

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dataController.StudentController;
+import events.ClickListener;
 import events.FormEvent;
 
 public class StudentAuthenticationSignUpAccountConfirmPanel extends JPanel{
@@ -26,7 +27,9 @@ public class StudentAuthenticationSignUpAccountConfirmPanel extends JPanel{
 	private JTextField studentConfirmationNumberField;
 	private JLabel invalidDataLabel;
 	private JButton nextButton;
+	
 	private StudentController studentController;
+	private ClickListener clickListener;
 	
 	public StudentAuthenticationSignUpAccountConfirmPanel(StudentController controller) {
 		
@@ -40,25 +43,15 @@ public class StudentAuthenticationSignUpAccountConfirmPanel extends JPanel{
 		studentConfirmationNumberField = new JTextField(5);
 		invalidDataLabel = new JLabel(" ");
 		nextButton = new JButton("Next");
+		studentController = controller;
 		
-		nextButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if(studentController.signupconfirm( Integer.parseInt( studentIDField.getText() ),
-												studentNameField.getText(),
-												Integer.parseInt( studentConfirmationNumberField.getText() )))			
-						System.out.println("yep");
-				else
-					System.out.println("No Sign In");
-			}	
-		});
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		gc.weightx = 0;
 		gc.weighty = 0;
 		gc.fill = GridBagConstraints.NONE;
-		gc.insets = new Insets(20,15,20,15);
+		gc.insets = new Insets(35,15,20,15);
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.LINE_END;
@@ -94,7 +87,7 @@ public class StudentAuthenticationSignUpAccountConfirmPanel extends JPanel{
 		gc.anchor = GridBagConstraints.LINE_START;
 		add(studentConfirmationNumberField, gc);
 		
-		gc.insets = new Insets(20,0,20,0);
+		gc.insets = new Insets(35,0,20,0);
 		gc.gridx = 0;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.SOUTHEAST;
@@ -103,8 +96,26 @@ public class StudentAuthenticationSignUpAccountConfirmPanel extends JPanel{
 		gc.weighty = 2;
 		gc.gridx = 1;
 		gc.gridy = 6;
-		gc.anchor = GridBagConstraints.SOUTHEAST;
+		gc.anchor = GridBagConstraints.EAST;
 		add(nextButton, gc);	
+		
+		nextButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				if(studentController.signupconfirm( Integer.parseInt( studentIDField.getText() ),
+												studentNameField.getText(),
+												Integer.parseInt( studentConfirmationNumberField.getText() ) ) && 
+						!studentController.getStudentbyID(Integer.parseInt( studentIDField.getText())).isAccount_Status()	)	
+					clickListener.clickedNum(Integer.parseInt(studentIDField.getText()));
+				else {
+					invalidDataLabel.setText("Invalid Data!");
+				}
+			}	
+		});
+	}
+	
+	public void setClickListener(ClickListener listener) {
+		this.clickListener = listener;
 	}
 	
 }
