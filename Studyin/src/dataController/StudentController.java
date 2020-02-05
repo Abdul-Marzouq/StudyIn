@@ -49,7 +49,6 @@ public class StudentController {
 		try {
 			String passwd = new String(pwd);
 			Student st = db.getStudentbyID(id);
-			System.out.println(passwd);
 			if(st.isAccount_Status() == true)
 				return db.updatePassword(id,uName,passwd,sqno,ans);
 			else
@@ -59,6 +58,16 @@ public class StudentController {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean checkSecInfo(int id,String uname,int qno,String ans) {
+		Student st = db.getStudentbyID(id);
+		if(st.getStudentUsername().equals(uname) && 
+				st.getSQ_No() == qno && st.getSQ_Answer().equals(ans)
+				&& st.isAccount_Status())
+			return true;
+		else
+			return false;
 	}
 	
 	public List<Student> getStudentDatabase() {

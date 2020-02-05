@@ -58,12 +58,14 @@ public class Student {
 		this.cnfno = rand.nextInt(1000);
 	}
 	
-	public Student(int id,String name, String age, String username,String password,int cnfno,boolean stat) {
+	public Student(int id,String name, String age, String username,String password,int sqno,String sqans,int cnfno,boolean stat) {
 		this.StudentId = id;
 		this.StudentAge = age;
 		this.StudentName = name;
 		this.StudentUsername = username;
 		this.StudentPassword = password;
+		this.SQ_No = sqno;
+		this.SQ_Answer = sqans;
 		this.cnfno = cnfno;
 		this.Account_Status = stat;
 	}

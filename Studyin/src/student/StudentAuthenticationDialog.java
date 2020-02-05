@@ -110,7 +110,7 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 
 		JButton clicked = (JButton)e.getSource();
 		if(clicked == forgotPasswordButton) {
-			sapcd = new StudentAuthenticationPasswordChangeDialog(this);
+			sapcd = new StudentAuthenticationPasswordChangeDialog(this,scontroller);
 		}
 		else if(clicked == studentSignUpButton) {
 			sasupd = new StudentAuthenticationSignUpDialog(this,scontroller);

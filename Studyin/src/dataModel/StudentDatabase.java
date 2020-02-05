@@ -55,7 +55,7 @@ public class StudentDatabase {
 	public void load() throws Exception{
 		
 		StudentList.clear();
-		String checksql = "select Student_ID, Name, Age, Username, Password, CNF_No, Account_Status from Student order by Student_ID";
+		String checksql = "select Student_ID, Name, Age, Username, Password, SQ_No, SQ_Answer, CNF_No, Account_Status from Student order by Student_ID";
 		connect();
 		if(con != null) {
 			Statement selstmt = con.createStatement();
@@ -68,6 +68,8 @@ public class StudentDatabase {
 				String age = result.getString("Age");
 				String username = result.getString("Username");
 				String password = result.getString("Password");
+				int sqno = result.getInt("SQ_No");
+				String sqans = result.getString("SQ_Answer");
 				int cnfno = result.getInt("CNF_No");
 				String stat = result.getString("Account_Status");
 				boolean st;
@@ -75,7 +77,7 @@ public class StudentDatabase {
 					st = true;
 				else
 					st = false;
-				Student student = new Student(id,name,age,username,password,cnfno,st);
+				Student student = new Student(id,name,age,username,password,sqno,sqans,cnfno,st);
 				StudentList.add(student);
 			}
 			selstmt.close();
@@ -188,6 +190,7 @@ public class StudentDatabase {
 			PreparedStatement updstmt = con.prepareStatement(updatesql);
 			updstmt.setString(1, pwd);
 			updstmt.setInt(2, temp.getStudentId());
+			updstmt.executeUpdate();
 			updstmt.close();
 			return true;
 		}
