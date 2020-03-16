@@ -1,4 +1,4 @@
-package student;
+package faculty;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,58 +15,58 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import dataController.StudentController;
+import dataController.FacultyController;
 import events.ClickListener;
 
-public class StudentAuthenticationPasswordChangeAccountConfirmPanel extends JPanel {
+public class FacultyAuthenticationPasswordChangeAccountConfirmPanel extends JPanel {
 	
-	private JLabel studentIDLabel;
-	private JTextField studentIDField;
-	private JLabel studentUsernameLabel;
-	private JTextField studentUsernameField;
-	private JLabel studentSecurityQuestionLabel;
-	private JComboBox studentSecurityQuestionBox;
-	private JLabel studentSecurityAnswerLabel;
-	private JTextField studentSecurityAnswerField;
-	private JLabel studentPasswordLabel;
-	private JPasswordField studentPasswordField;
-	private JLabel studentConfirmPasswordLabel;
-	private JPasswordField studentConfirmPasswordField; 
+	private JLabel facultyIDLabel;
+	private JTextField facultyIDField;
+	private JLabel facultyUsernameLabel;
+	private JTextField facultyUsernameField;
+	private JLabel facultySecurityQuestionLabel;
+	private JComboBox facultySecurityQuestionBox;
+	private JLabel facultySecurityAnswerLabel;
+	private JTextField facultySecurityAnswerField;
+	private JLabel facultyPasswordLabel;
+	private JPasswordField facultyPasswordField;
+	private JLabel facultyConfirmPasswordLabel;
+	private JPasswordField facultyConfirmPasswordField; 
 	private JLabel invalidDataLabel;
 	private JLabel invalidDataLabel2;
 	private JButton nextButton;
-	private StudentController studentController;
+	private FacultyController facultyController;
 	private ClickListener clickListener;
 	
-	public StudentAuthenticationPasswordChangeAccountConfirmPanel(StudentController controller) {
+	public FacultyAuthenticationPasswordChangeAccountConfirmPanel(FacultyController controller) {
 	
 		setVisible(true);
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
-		studentIDLabel = new JLabel("Student ID: ");
-		studentIDField = new JTextField(5);
-		studentUsernameLabel = new JLabel("Username: ");
-		studentUsernameField = new JTextField(10);
-		studentSecurityQuestionLabel = new JLabel("Security Question: ");
-		studentSecurityQuestionBox = new JComboBox();
-		studentSecurityAnswerLabel = new JLabel("Answer: ");
-		studentSecurityAnswerField = new JTextField(10);
-		studentPasswordLabel = new JLabel("New Password: ");
-		studentPasswordField = new JPasswordField(10);
-		studentConfirmPasswordLabel = new JLabel("Confirm Password: ");
-		studentConfirmPasswordField = new JPasswordField(10);
+		facultyIDLabel = new JLabel("Faculty ID: ");
+		facultyIDField = new JTextField(5);
+		facultyUsernameLabel = new JLabel("Username: ");
+		facultyUsernameField = new JTextField(10);
+		facultySecurityQuestionLabel = new JLabel("Security Question: ");
+		facultySecurityQuestionBox = new JComboBox();
+		facultySecurityAnswerLabel = new JLabel("Answer: ");
+		facultySecurityAnswerField = new JTextField(10);
+		facultyPasswordLabel = new JLabel("New Password: ");
+		facultyPasswordField = new JPasswordField(10);
+		facultyConfirmPasswordLabel = new JLabel("Confirm Password: ");
+		facultyConfirmPasswordField = new JPasswordField(10);
 		invalidDataLabel = new JLabel("Invalid Data!");
 		invalidDataLabel2 = new JLabel("Invalid Data!");
 		nextButton  = new JButton("Next");
-		studentController = controller;
+		facultyController = controller;
 
 	
 		DefaultComboBoxModel securityQuestionModel = new DefaultComboBoxModel();
 		securityQuestionModel.addElement("What is the name of your first teacher?");
 		securityQuestionModel.addElement("What was your first pet?");
 		securityQuestionModel.addElement("Who is your best friend?");
-		studentSecurityQuestionBox.setModel(securityQuestionModel);
+		facultySecurityQuestionBox.setModel(securityQuestionModel);
 		
 		gc.weightx = 0;
 		gc.weighty = 0;
@@ -76,62 +76,62 @@ public class StudentAuthenticationPasswordChangeAccountConfirmPanel extends JPan
 		gc.gridx = 0;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentIDLabel, gc);
+		add(facultyIDLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentIDField, gc);
+		add(facultyIDField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentUsernameLabel, gc);
+		add(facultyUsernameLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentUsernameField, gc);
+		add(facultyUsernameField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 2;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentSecurityQuestionLabel, gc);
+		add(facultySecurityQuestionLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 2;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentSecurityQuestionBox, gc);
+		add(facultySecurityQuestionBox, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentSecurityAnswerLabel, gc);
+		add(facultySecurityAnswerLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentSecurityAnswerField, gc);
+		add(facultySecurityAnswerField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentPasswordLabel, gc);
+		add(facultyPasswordLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentPasswordField, gc);
+		add(facultyPasswordField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 5;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentConfirmPasswordLabel, gc);
+		add(facultyConfirmPasswordLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 5;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentConfirmPasswordField, gc);
+		add(facultyConfirmPasswordField, gc);
 		
 		gc.insets = new Insets(20,0,20,0);
 		gc.gridx = 0;
@@ -149,11 +149,11 @@ public class StudentAuthenticationPasswordChangeAccountConfirmPanel extends JPan
 		nextButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				if(Arrays.equals(studentPasswordField.getPassword(),studentConfirmPasswordField.getPassword())
-						 && studentController.setpassword(Integer.parseInt( studentIDField.getText() ),
-								 studentUsernameField.getText(),
-									studentPasswordField.getPassword(), (String)studentSecurityQuestionBox.getSelectedItem(), 
-									studentSecurityAnswerField.getText()) ) {
+				if(Arrays.equals(facultyPasswordField.getPassword(),facultyConfirmPasswordField.getPassword())
+						 && facultyController.setpassword(Integer.parseInt( facultyIDField.getText() ),
+								 facultyUsernameField.getText(),
+									facultyPasswordField.getPassword(), (String)facultySecurityQuestionBox.getSelectedItem(), 
+									facultySecurityAnswerField.getText()) ) {
 					clickListener.clickedNum(-1);		
 				}
 				else {

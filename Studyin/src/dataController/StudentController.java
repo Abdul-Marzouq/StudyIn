@@ -45,19 +45,30 @@ public class StudentController {
 	}
 
 	
-	public boolean setpassword(int id,String uName,char[] pwd,int sqno,String ans) {
+	public boolean setpassword(int id,String uName,char[] pwd,String sqstn,String ans) {
 		try {
 			String passwd = new String(pwd);
 			Student st = db.getStudentbyID(id);
 			if(st.isAccount_Status() == true)
-				return db.updatePassword(id,uName,passwd,sqno,ans);
+				return db.updatePassword(id,uName,passwd,retsqno(sqstn),ans);
 			else
-				return db.updateStudentSecurityInfo(id,uName,passwd,sqno,ans);
+				return db.updateStudentSecurityInfo(id,uName,passwd,retsqno(sqstn),ans);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public int signincheck(String uname,char[] pwd) {
+		Student st = db.getStudentbyuname(uname);
+		if(st != null) {
+			if(st.checkPassword(new String(pwd)))
+				return st.getStudentId();
+			else return -1;
+		}
+		else
+			return -1;
 	}
 	
 	public boolean checkSecInfo(int id,String uname,int qno,String ans) {
@@ -68,6 +79,15 @@ public class StudentController {
 			return true;
 		else
 			return false;
+	}
+	
+	public int retsqno(String sqstn) {
+		switch(sqstn) {
+		case "What is the name of your first teacher?": return 1;
+		case "What was your first pet?": return 2;
+		case "Who is your best friend?": return 3;
+		}
+		return 1;
 	}
 	
 	public List<Student> getStudentDatabase() {

@@ -101,5 +101,8 @@ public class Student {
 	public void setPassword(String password) {
 		StudentPassword = password;
 	}
+	public boolean checkPassword(String pwd) {
+		return pwd.equals(StudentPassword);
+	}
 
 }

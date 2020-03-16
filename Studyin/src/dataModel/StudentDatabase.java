@@ -134,6 +134,14 @@ public class StudentDatabase {
 		return null;
 	}
 	
+	public Student getStudentbyuname(String uname) {
+		for(int i=0;i<StudentList.size();i++) {
+			if(uname.equals(StudentList.get(i).getStudentUsername()))
+				return StudentList.get(i);
+		}
+		return null;
+	}
+	
 	public boolean updateStudentSecurityInfo(int sq_id, String uName,String pwd,int sq_no,String sq_ans) throws SQLException {
 		String updatesql = "update Student set Username = ?,Password = ?,SQ_No = ?, SQ_Answer = ?, Account_Status = ? where Student_ID = ?";
 		System.out.println("pass");

@@ -23,6 +23,7 @@ public class StudentWindow extends JFrame{
 			
 			setLayout(new BorderLayout());
 			studentController = new StudentController(true);
+			setVisible(false);
 			
 			sad = new StudentAuthenticationDialog(this,studentController);
 			sad.setVisible(true);
@@ -32,7 +33,16 @@ public class StudentWindow extends JFrame{
 			            System.exit(0);
 			        }
 			});
-		
+			
+			sad.setClickListener( new ClickListener() {
+				public void clickedNum(int clickStatus) {
+					if(clickStatus != -1) {
+						sad.setVisible(false);
+						setVisible(true);
+					}
+				}
+			});
+			
 			/*sbp = new StudentButtonPanel();
 			swp = new StudentWorkingPanel(studentController);*/
 			
@@ -46,16 +56,9 @@ public class StudentWindow extends JFrame{
 							swp.display(ClickStatus);
 				}	
 			});
-
+			 */
 			setSize(500,480);
-		 	setVisible(true);
 		}
-
-		public void disconnect() {
-			studentController.disconnectDatabase();
-		}*/
-
-}
 
 		public void disconnect() {
 			studentController.disconnectDatabase();

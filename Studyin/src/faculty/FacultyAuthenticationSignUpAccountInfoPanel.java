@@ -1,4 +1,4 @@
-package student;
+package faculty;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,104 +15,104 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import dataController.StudentController;
+import dataController.FacultyController;
 import events.ClickListener;
 
-public class StudentAuthenticationSignUpAccountInfoPanel extends JPanel{
+public class FacultyAuthenticationSignUpAccountInfoPanel extends JPanel{
 
-	private JLabel studentUsernameLabel;
-	private JTextField studentUsernameField;
-	private JLabel studentPasswordLabel;
-	private JPasswordField studentPasswordField;
-	private JLabel studentConfirmPasswordLabel;
-	private JPasswordField studentConfirmPasswordField; 
-	private JLabel studentSecurityQuestionLabel;
-	private JComboBox studentSecurityQuestionBox;
-	private JLabel studentSecurityAnswerLabel;
-	private JTextField studentSecurityAnswerField;
+	private JLabel facultyUsernameLabel;
+	private JTextField facultyUsernameField;
+	private JLabel facultyPasswordLabel;
+	private JPasswordField facultyPasswordField;
+	private JLabel facultyConfirmPasswordLabel;
+	private JPasswordField facultyConfirmPasswordField; 
+	private JLabel facultySecurityQuestionLabel;
+	private JComboBox facultySecurityQuestionBox;
+	private JLabel facultySecurityAnswerLabel;
+	private JTextField facultySecurityAnswerField;
 	private JLabel invalidDataLabel;
 	private JButton createAccountButton;
-	private StudentController studentController;
+	private FacultyController facultyController;
 	private int id;
 	private ClickListener clickListener;
 	
-	public StudentAuthenticationSignUpAccountInfoPanel(StudentController controller) {
+	public FacultyAuthenticationSignUpAccountInfoPanel(FacultyController controller) {
 		
 		setVisible(true);
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
-		studentUsernameLabel = new JLabel("Account Username: ");
-		studentUsernameField = new JTextField(10);
-		studentPasswordLabel = new JLabel("New Password: ");
-		studentPasswordField = new JPasswordField(10);
-		studentConfirmPasswordLabel = new JLabel("Confirm Password: ");
-		studentConfirmPasswordField = new JPasswordField(10);
-		studentSecurityQuestionLabel = new JLabel("Security Question: ");
-		studentSecurityQuestionBox = new JComboBox();
-		studentSecurityAnswerLabel = new JLabel("Answer: ");
-		studentSecurityAnswerField = new JTextField(10);
+		facultyUsernameLabel = new JLabel("Account Username: ");
+		facultyUsernameField = new JTextField(10);
+		facultyPasswordLabel = new JLabel("New Password: ");
+		facultyPasswordField = new JPasswordField(10);
+		facultyConfirmPasswordLabel = new JLabel("Confirm Password: ");
+		facultyConfirmPasswordField = new JPasswordField(10);
+		facultySecurityQuestionLabel = new JLabel("Security Question: ");
+		facultySecurityQuestionBox = new JComboBox();
+		facultySecurityAnswerLabel = new JLabel("Answer: ");
+		facultySecurityAnswerField = new JTextField(10);
 		invalidDataLabel = new JLabel(" ");
 		createAccountButton  = new JButton("Create Account");
-		studentController = controller;
+		facultyController = controller;
 
 		DefaultComboBoxModel securityQuestionModel = new DefaultComboBoxModel();
 		securityQuestionModel.addElement("What is the name of your first teacher?");
 		securityQuestionModel.addElement("What was your first pet?");
 		securityQuestionModel.addElement("Who is your best friend?");
-		studentSecurityQuestionBox.setModel(securityQuestionModel);
+		facultySecurityQuestionBox.setModel(securityQuestionModel);
 		
 		gc.weightx = 0;
 		gc.weighty = 0;
 		gc.fill = GridBagConstraints.NONE;
 		gc.insets = new Insets(20,15,20,15);
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentUsernameLabel, gc);
+		add(facultyUsernameLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 0;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentUsernameField, gc);
+		add(facultyUsernameField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentPasswordLabel, gc);
+		add(facultyPasswordLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentPasswordField, gc);
+		add(facultyPasswordField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 2;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentConfirmPasswordLabel, gc);
+		add(facultyConfirmPasswordLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 2;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentConfirmPasswordField, gc);
+		add(facultyConfirmPasswordField, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentSecurityQuestionLabel, gc);
+		add(facultySecurityQuestionLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentSecurityQuestionBox, gc);
+		add(facultySecurityQuestionBox, gc);
 		
 		gc.gridx = 0;
 		gc.gridy = 5;
 		gc.anchor = GridBagConstraints.LINE_END;
-		add(studentSecurityAnswerLabel, gc);
+		add(facultySecurityAnswerLabel, gc);
 		
 		gc.gridx = 1;
 		gc.gridy = 5;
 		gc.anchor = GridBagConstraints.LINE_START;
-		add(studentSecurityAnswerField, gc);
+		add(facultySecurityAnswerField, gc);
 		
 		gc.insets = new Insets(20,0,20,0);
 		gc.gridx = 0;
@@ -129,10 +129,10 @@ public class StudentAuthenticationSignUpAccountInfoPanel extends JPanel{
 		createAccountButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				if(Arrays.equals(studentPasswordField.getPassword(),studentConfirmPasswordField.getPassword()) 
-						&& studentController.setpassword(id, studentUsernameField.getText(),
-								studentPasswordField.getPassword(),  (String)studentSecurityQuestionBox.getSelectedItem(), 
-								studentSecurityAnswerField.getText()) )	
+				if(Arrays.equals(facultyPasswordField.getPassword(),facultyConfirmPasswordField.getPassword()) 
+						&& facultyController.setpassword(id, facultyUsernameField.getText(),
+								facultyPasswordField.getPassword(),  (String)facultySecurityQuestionBox.getSelectedItem(), 
+								facultySecurityAnswerField.getText()) )	
 					clickListener.clickedNum(-1);
 				else { 
 					invalidDataLabel.setText("Invalid Data!");

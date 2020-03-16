@@ -1,4 +1,4 @@
-package student;
+package faculty;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,28 +13,28 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import dataController.StudentController;
+import dataController.FacultyController;
 import events.ClickListener;
 
-public class StudentAuthenticationDialog extends JDialog implements ActionListener{
+public class FacultyAuthenticationDialog extends JDialog implements ActionListener{
 
-	private JLabel studentSignUpDescriptionLabel;
-	private JButton studentSignUpButton;
+	private JLabel facultySignUpDescriptionLabel;
+	private JButton facultySignUpButton;
 	private JLabel userNameLabel;
 	private JTextField userNameField;
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
-	private JButton studentSignInButton;
+	private JButton facultySignInButton;
 	private JLabel invalidDataLabel;
 	private JButton forgotPasswordButton;
-	private StudentAuthenticationSignUpDialog sasupd;
-	private StudentAuthenticationPasswordChangeDialog sapcd;
+	private FacultyAuthenticationSignUpDialog fasupd;
+	private FacultyAuthenticationPasswordChangeDialog fapcd;
 	private ClickListener clickListener;
-	private StudentController scontroller;
+	private FacultyController scontroller;
 
-	public StudentAuthenticationDialog(JFrame parent,StudentController controller) {
+	public FacultyAuthenticationDialog(JFrame parent,FacultyController controller) {
 
-		super(parent, "Student Authentication Panel", false);
+		super(parent, "Faculty Authentication Panel", false);
 		scontroller = controller;
 		setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
@@ -42,14 +42,14 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 		passwordLabel = new JLabel("Account Password: ");
 		userNameField = new JTextField(12);
 		passwordField = new JPasswordField(12);
-		studentSignUpDescriptionLabel = new JLabel("In case of a new account,  ");
-		studentSignUpButton = new JButton("Sign Up");
-		studentSignInButton = new JButton("Sign In");
+		facultySignUpDescriptionLabel = new JLabel("In case of a new account,  ");
+		facultySignUpButton = new JButton("Sign Up");
+		facultySignInButton = new JButton("Sign In");
 		invalidDataLabel = new JLabel(" ");
 		forgotPasswordButton = new JButton("Forgot Password?");
 		
-		studentSignUpButton.addActionListener(this);
-		studentSignInButton.addActionListener(this);
+		facultySignUpButton.addActionListener(this);
+		facultySignInButton.addActionListener(this);
 		forgotPasswordButton.addActionListener(this);
 
 		gc.weightx = 0;
@@ -85,7 +85,7 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 		gc.gridx = 1;
 		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.CENTER;
-		add(studentSignInButton, gc);	
+		add(facultySignInButton, gc);	
 
 		gc.gridx = 0;
 		gc.gridy = 3;
@@ -97,12 +97,12 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 		gc.gridx = 0;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.SOUTHEAST;
-		add(studentSignUpDescriptionLabel, gc);
+		add(facultySignUpDescriptionLabel, gc);
 
 		gc.gridx = 1;
 		gc.gridy = 4;
 		gc.anchor = GridBagConstraints.SOUTHWEST;
-		add(studentSignUpButton, gc);
+		add(facultySignUpButton, gc);
 		setSize(500,370);
 	}
 	
@@ -110,12 +110,12 @@ public class StudentAuthenticationDialog extends JDialog implements ActionListen
 
 		JButton clicked = (JButton)e.getSource();
 		if(clicked == forgotPasswordButton) {
-			sapcd = new StudentAuthenticationPasswordChangeDialog(this,scontroller);
+			fapcd = new FacultyAuthenticationPasswordChangeDialog(this,scontroller);
 		}
-		else if(clicked == studentSignUpButton) {
-			sasupd = new StudentAuthenticationSignUpDialog(this,scontroller);
+		else if(clicked == facultySignUpButton) {
+			fasupd = new FacultyAuthenticationSignUpDialog(this,scontroller);
 		}
-		else if(clicked == studentSignInButton) {
+		else if(clicked == facultySignInButton) {
 			int id = scontroller.signincheck(userNameField.getText(),passwordField.getPassword());
 			clickListener.clickedNum(id);
 			

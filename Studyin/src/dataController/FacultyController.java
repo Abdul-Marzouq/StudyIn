@@ -10,7 +10,6 @@ import events.FormEvent;
 public class FacultyController {
 	
 	private FacultyDatabase db;
-	private int last_ID;
 	
 	public FacultyController(){
 		db = new FacultyDatabase();
@@ -22,6 +21,8 @@ public class FacultyController {
 			db.load();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -30,9 +31,63 @@ public class FacultyController {
 		String name = e.getName();
 		String age = e.getAge();
 		
-		Faculty faculty = new Faculty(db.get_lastID()+1, name, age);
+		Faculty faculty = new Faculty(db.get_lastID()+1, name, age, "");
 		
-		db.addFaculty(faculty);
+		try {
+			db.addFaculty(faculty);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	public boolean signupconfirm(int id, String name,int cnf) {
+		return db.cnfNoCheck(id, name, cnf);
+	}
+
+	
+	public boolean setpassword(int id,String uName,char[] pwd,String sqstn,String ans) {
+		try {
+			String passwd = new String(pwd);
+			Faculty st = db.getFacultybyID(id);
+			if(st.isAccount_Status() == true)
+				return db.updatePassword(id,uName,passwd,retsqno(sqstn),ans);
+			else
+				return db.updateFacultySecurityInfo(id,uName,passwd,retsqno(sqstn),ans);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public int signincheck(String uname,char[] pwd) {
+		Faculty st = db.getFacultybyuname(uname);
+		if(st != null) {
+			if(st.checkPassword(new String(pwd)))
+				return st.getFacultyId();
+			else return -1;
+		}
+		else
+			return -1;
+	}
+	
+	public boolean checkSecInfo(int id,String uname,int qno,String ans) {
+		Faculty st = db.getFacultybyID(id);
+		if(st.getFacultyUsername().equals(uname) && 
+				st.getSQ_No() == qno && st.getSQ_Answer().equals(ans)
+				&& st.isAccount_Status())
+			return true;
+		else
+			return false;
+	}
+	
+	public int retsqno(String sqstn) {
+		switch(sqstn) {
+		case "What is the name of your first teacher?": return 1;
+		case "What was your first pet?": return 2;
+		case "Who is your best friend?": return 3;
+		}
+		return 1;
 	}
 	
 	public List<Faculty> getFacultyDatabase() {
@@ -48,7 +103,11 @@ public class FacultyController {
 	}
 	
 	public void updateFacultybyID(int id, String name, String age) {
-		db.updateFacultybyID(id,name,age);
+		try {
+			db.updateFacultybyID(id,name,age);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void deleteFacultybyID(int id) {
