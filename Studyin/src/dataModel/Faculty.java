@@ -7,7 +7,7 @@ public class Faculty {
 	private static int count = 0;
 	private int FacultyId;
 	private String FacultyName;
-	private String FacultyAge;
+	private int FacultyAge;
 	private String FacultyUsername;
 	private String FacultyPassword;
 	private int SQ_No;
@@ -57,7 +57,7 @@ public class Faculty {
 		SQ_Answer = sQ_Answer;
 	}
 
-	public Faculty(int id,String name, String age, String sub) {
+	public Faculty(int id,String name, int age, String sub) {
 		Random rand = new Random();
 		this.FacultyId = id;
 		this.FacultyAge = age;
@@ -66,7 +66,7 @@ public class Faculty {
 		this.cnfno = rand.nextInt(1000);
 	}
 	
-	public Faculty(int id,String name, String age, String username,String password,int sqno,String sqans,int cnfno,boolean stat, String sub) {
+	public Faculty(int id,String name, int age, String username,String password,int sqno,String sqans,int cnfno,boolean stat, String sub) {
 		this.FacultyId = id;
 		this.FacultyAge = age;
 		this.FacultyName = name;
@@ -95,10 +95,10 @@ public class Faculty {
 	public void setFacultyName(String facultyName) {
 		FacultyName = facultyName;
 	}
-	public String getFacultyAge() {
+	public int getFacultyAge() {
 		return FacultyAge;
 	}
-	public void setFacultyAge(String facultyAge) {
+	public void setFacultyAge(int facultyAge) {
 		FacultyAge = facultyAge;
 	}
 	public String getFacultyUsername() {

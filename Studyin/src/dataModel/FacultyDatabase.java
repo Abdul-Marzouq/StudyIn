@@ -59,7 +59,7 @@ public class FacultyDatabase {
 			while(result.next()) {
 				int id = result.getInt("Faculty_ID");
 				String name = result.getString("Name");
-				String age = result.getString("Age");
+				int age = result.getInt("Age");
 				String username = result.getString("Username");
 				String password = result.getString("Password");
 				int sqno = result.getInt("SQ_No");
@@ -86,20 +86,20 @@ public class FacultyDatabase {
 		int col = 1;
 		insstmt.setInt(col++, newFaculty.getFacultyId());
 		insstmt.setString(col++, newFaculty.getFacultyName());
-		insstmt.setString(col++, newFaculty.getFacultyAge());
+		insstmt.setInt(col++, newFaculty.getFacultyAge());
 		insstmt.setInt(col++, newFaculty.getCnfno());
 		insstmt.setString(col++, newFaculty.getSubject());
 		insstmt.executeUpdate();
 		insstmt.close();
 	}
 	
-	public void update(int id, String name, String age, String sub) throws SQLException {
+	public void update(int id, String name, int age, String sub) throws SQLException {
 		
 		String updatesql = "update Faculty set Name = ?, Age = ?, Subject = ? where Faculty_ID = ?";
 		PreparedStatement updstmt = con.prepareStatement(updatesql);
 		int col = 1;
 		updstmt.setString(col++, name);
-		updstmt.setString(col++, age);
+		updstmt.setInt(col++, age);
 		updstmt.setInt(col++, id);
 		updstmt.setString(col++, sub);
 		updstmt.executeUpdate();
@@ -154,7 +154,7 @@ public class FacultyDatabase {
 		return true;
 	}
 	
-	public void updateFacultybyID(int id, String name, String age,String sub) throws SQLException {
+	public void updateFacultybyID(int id, String name, int age,String sub) throws SQLException {
 		Faculty faculty = getFacultybyID(id);
 		faculty.setFacultyName(name);
 		faculty.setFacultyAge(age);

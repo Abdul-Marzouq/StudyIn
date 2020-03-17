@@ -24,13 +24,9 @@ public class FacultyController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}	
 	
-	public void addFaculty(FormEvent e) {
-		
-		String name = e.getName();
-		String age = e.getAge();
-		String sub = e.getSubject();
+	public void addFaculty(String name,int age,String sub) {
 		
 		Faculty faculty = new Faculty(db.get_lastID()+1, name, age, sub);
 		
@@ -103,7 +99,7 @@ public class FacultyController {
 		return db.getFacultybyID(id);
 	}
 	
-	public void updateFacultybyID(int id, String name, String age,String sub) {
+	public void updateFacultybyID(int id, String name,int age,String sub) {
 		try {
 			db.updateFacultybyID(id,name,age,sub);
 		} catch (SQLException e) {

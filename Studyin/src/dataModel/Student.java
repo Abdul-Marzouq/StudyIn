@@ -7,7 +7,7 @@ public class Student {
 	private static int count = 0;
 	private int StudentId;
 	private String StudentName;
-	private String StudentAge;
+	private int StudentAge;
 	private String StudentUsername;
 	private String StudentPassword;
 	private int SQ_No;
@@ -48,7 +48,7 @@ public class Student {
 		SQ_Answer = sQ_Answer;
 	}
 
-	public Student(int id,String name, String age) {
+	public Student(int id,String name, int age) {
 		Random rand = new Random();
 		this.StudentId = id;
 		this.StudentAge = age;
@@ -56,7 +56,7 @@ public class Student {
 		this.cnfno = rand.nextInt(1000);
 	}
 	
-	public Student(int id,String name, String age, String username,String password,int sqno,String sqans,int cnfno,boolean stat) {
+	public Student(int id,String name, int age, String username,String password,int sqno,String sqans,int cnfno,boolean stat) {
 		this.StudentId = id;
 		this.StudentAge = age;
 		this.StudentName = name;
@@ -84,10 +84,10 @@ public class Student {
 	public void setStudentName(String studentName) {
 		StudentName = studentName;
 	}
-	public String getStudentAge() {
+	public int getStudentAge() {
 		return StudentAge;
 	}
-	public void setStudentAge(String studentAge) {
+	public void setStudentAge(int studentAge) {
 		StudentAge = studentAge;
 	}
 	public String getStudentUsername() {

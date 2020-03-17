@@ -65,7 +65,7 @@ public class StudentDatabase {
 			while(result.next()) {
 				int id = result.getInt("Student_ID");
 				String name = result.getString("Name");
-				String age = result.getString("Age");
+				int age = result.getInt("Age");
 				String username = result.getString("Username");
 				String password = result.getString("Password");
 				int sqno = result.getInt("SQ_No");
@@ -90,19 +90,19 @@ public class StudentDatabase {
 		int col = 1;
 		insstmt.setInt(col++, newStudent.getStudentId());
 		insstmt.setString(col++, newStudent.getStudentName());
-		insstmt.setString(col++, newStudent.getStudentAge());
+		insstmt.setInt(col++, newStudent.getStudentAge());
 		insstmt.setInt(col++, newStudent.getCnfno());
 		insstmt.executeUpdate();
 		insstmt.close();
 	}
 	
-	public void update(int id, String name, String age) throws SQLException {
+	public void update(int id, String name, int age) throws SQLException {
 		
 		String updatesql = "update Student set Name = ?, Age = ? where Student_ID = ?";
 		PreparedStatement updstmt = con.prepareStatement(updatesql);
 		int col = 1;
 		updstmt.setString(col++, name);
-		updstmt.setString(col++, age);
+		updstmt.setInt(col++, age);
 		updstmt.setInt(col++, id);
 		updstmt.executeUpdate();
 		updstmt.close();
@@ -156,7 +156,7 @@ public class StudentDatabase {
 		return true;
 	}
 	
-	public void updateStudentbyID(int id, String name, String age) throws SQLException {
+	public void updateStudentbyID(int id, String name, int age) throws SQLException {
 		Student student = getStudentbyID(id);
 		student.setStudentName(name);
 		student.setStudentAge(age);

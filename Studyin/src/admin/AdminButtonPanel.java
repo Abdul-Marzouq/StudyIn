@@ -1,6 +1,8 @@
 package admin;
 
-import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,51 +15,31 @@ import events.ClickListener;
 
 public class AdminButtonPanel extends JPanel implements ActionListener{
 	
-	private JButton csa;
-	private JButton cfa;
-	private JButton dsa;
-	private JButton dfa;
-	private JButton esa;
-	private JButton efa;
-	private JButton ssd;
-	private JButton sfd;
+	private JButton cr;
+	private JButton u;
+	private JButton d;
+
 	private ClickListener listener;
 
 	public AdminButtonPanel() {
 		
-		setLayout(new GridLayout(8,0));
+		setLayout(new FlowLayout(FlowLayout.CENTER, 45, 5));
 		
-		Border innerBorder = BorderFactory.createTitledBorder("Menu");
-		Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
+		Border innerBorder = BorderFactory.createTitledBorder("");
+		Border outerBorder = BorderFactory.createEmptyBorder(3,3,3,3);
 		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+
+		cr = new JButton("Create");
+		cr.addActionListener(this);
+		add(cr);
 		
-		csa = new JButton("Create Student Account");
-		cfa = new JButton("Create Faculty Account");
-		esa = new JButton("Edit Student Account");
-		efa = new JButton("Edit Faculty Account");
-		dsa = new JButton("Delete Student Account");
-		dfa = new JButton("Delete Faculty Account");
-		ssd = new JButton("Show Student Database");
-		sfd = new JButton("Show Faculty Database");
-		//GridBagConstraints gc = new GridBagConstraints();
+		u = new JButton("Update");
+		u.addActionListener(this);
+		add(u);
 		
-		csa.addActionListener(this);
-		cfa.addActionListener(this);
-		esa.addActionListener(this);
-		efa.addActionListener(this);
-		dsa.addActionListener(this);
-		dfa.addActionListener(this);
-		ssd.addActionListener(this);
-		sfd.addActionListener(this);
-		
-		add(csa);
-		add(esa);
-		add(dsa);
-		add(ssd);
-		add(cfa);
-		add(efa);
-		add(dfa);
-		add(sfd);
+		d = new JButton("Delete");
+		d.addActionListener(this);
+		add(d);
 	}
 	
 	public void setClicklistener(ClickListener cl) {
@@ -67,46 +49,20 @@ public class AdminButtonPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		
 		JButton clicked = (JButton)e.getSource();
-		if(clicked == csa) {
-				if(listener != null) {
-					listener.clickedNum(1);
-				}
+		if(clicked == cr)  {
+			if(listener != null) {
+				listener.clickedNum(1);
+			}
 		}
-		 else if(clicked == esa) {
+		else if(clicked == u)  {
 			if(listener != null) {
 				listener.clickedNum(2);
 			}
 		}
-		else if(clicked == dsa) {
-				if(listener != null) {
-					listener.clickedNum(3);
-				}
-		}
-		else if(clicked == ssd) {
+		else if(clicked == d)  {
 			if(listener != null) {
-				listener.clickedNum(4);
+				listener.clickedNum(3);
 			}
-		}
-		else if(clicked == cfa) {
-			if(listener != null) {
-				listener.clickedNum(5);
-			}
-		}
-		
-		else if(clicked == efa) {
-			if(listener != null) {
-				listener.clickedNum(6);
-			}
-		}
-		else if(clicked == dfa) {
-				if(listener != null) {
-					listener.clickedNum(7);
-				}
-		}
-		else if(clicked == sfd) {
-				if(listener != null) {
-					listener.clickedNum(8);
-				}
 		}
 	}
 }

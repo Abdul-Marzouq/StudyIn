@@ -1,5 +1,6 @@
 package admin;
 
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -8,29 +9,36 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
+import dataController.StudentController;
 import events.ClickListener;
 import events.FormEvent;
 import events.FormListener;
 
-public class AdminStudentCreateFormPanel extends JPanel{
+public class AdminStudentCreateUpdateDialog extends JDialog{
 	
 	private JLabel nameLabel;
 	private JTextField nameField;
 	private JLabel ageLabel;
 	private JTextField ageField;
 	private JButton createAccountButton;
+	private JButton updateAccountButton;
 	private FormListener formListener;
 	private ClickListener clickListener;
+	private StudentController studentController;
+	private int id;
 	
-	public AdminStudentCreateFormPanel() {
-		
-		setVisible(true);
+	public AdminStudentCreateUpdateDialog(JFrame parent,String title,StudentController s) {
+		super(parent, title, false);
 		setLayout(new GridBagLayout());
+		
+		studentController = s;
 		
 		GridBagConstraints gc = new GridBagConstraints();
 		
@@ -39,24 +47,26 @@ public class AdminStudentCreateFormPanel extends JPanel{
 		ageLabel = new JLabel("Age: ");
 		ageField = new JTextField(10);
 		createAccountButton = new JButton("Create Account");
-		
-		Border innerBorder = BorderFactory.createTitledBorder("Create Student Account");
-		Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
-		setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+		updateAccountButton = new JButton("Update Account");
 		
 		createAccountButton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				String name  = nameField.getText();
-				String age = ageField.getText(); 
-				
-				FormEvent event = new FormEvent(this, name, age);
-				
-				if(formListener != null) {
-					formListener.FormEventOccurred(event);
-					
+				int age = Integer.parseInt(ageField.getText()); 
+				studentController.addStudent(name, age);
 				clickListener.clickedNum(100);
-				}
+			}
+		});
+		
+		updateAccountButton.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				String name  = nameField.getText();
+				int age = Integer.parseInt(ageField.getText()); 
+				studentController.updateStudentbyID(id,name, age);
+				clickListener.clickedNum(100);
+	
 			}
 		});
 		
@@ -97,8 +107,12 @@ public class AdminStudentCreateFormPanel extends JPanel{
 		gc.gridx = 1;
 		gc.gridy = 2;
 		gc.anchor = GridBagConstraints.CENTER;
-		add(createAccountButton, gc);
-		
+		if(title.equals("Create Student Account"))
+			add(createAccountButton, gc);
+		else
+			add(updateAccountButton,gc);
+			
+		setSize(600,480);
 	}
 	
 	public void setFormListener(FormListener listener) {
@@ -115,4 +129,14 @@ public class AdminStudentCreateFormPanel extends JPanel{
 		ageField.setText("");
 	}
 	
+	public void setupdateinfo() {
+		nameField.setText(this.studentController.getStudentbyID(id).getStudentName());
+		ageField.setText((Integer.toString(this.studentController.getStudentbyID(id).getStudentAge())));
+	}
+	
+	public void setID(int id) {
+		this.id = id;
+	}
+	
 }
+	

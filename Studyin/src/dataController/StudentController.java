@@ -26,10 +26,7 @@ public class StudentController {
 		}
 	}
 	
-	public void addStudent(FormEvent e) {
-		
-		String name = e.getName();
-		String age = e.getAge();
+	public void addStudent(String name, int age) {
 		
 		Student student = new Student(db.get_lastID()+1, name, age);
 		
@@ -102,7 +99,7 @@ public class StudentController {
 		return db.getStudentbyID(id);
 	}
 	
-	public void updateStudentbyID(int id, String name, String age) {
+	public void updateStudentbyID(int id, String name, int age) {
 		try {
 			db.updateStudentbyID(id,name,age);
 		} catch (SQLException e) {
