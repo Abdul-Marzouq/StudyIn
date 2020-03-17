@@ -17,12 +17,6 @@ public class FacultyDatabase {
 	public FacultyDatabase() {
 		FacultyList = new ArrayList<Faculty>();
 	}
-
-	public void addFaculty(Faculty newFaculty) throws SQLException {
-		FacultyList.add(newFaculty);
-		insert(newFaculty);
-
-	}
 	
 	public List<Faculty> getFacultyList() {
 		return FacultyList;
@@ -55,7 +49,7 @@ public class FacultyDatabase {
 	public void load() throws Exception{
 		
 		FacultyList.clear();
-		String checksql = "select Faculty_ID, Name, Age, Username, Password, SQ_No, SQ_Answer, CNF_No, Account_Status from Faculty order by Faculty_ID";
+		String checksql = "select Faculty_ID, Name, Age, Username, Password, SQ_No, SQ_Answer, CNF_No, Account_Status, Subject from Faculty order by Faculty_ID";
 		connect();
 		if(con != null) {
 			Statement selstmt = con.createStatement();
@@ -77,35 +71,37 @@ public class FacultyDatabase {
 					st = true;
 				else
 					st = false;
-				Faculty faculty = new Faculty(id,name,age,username,password,sqno,sqans,cnfno,st);
+				String sub = result.getString("Subject");
+				Faculty faculty = new Faculty(id,name,age,username,password,sqno,sqans,cnfno,st,sub);
 				FacultyList.add(faculty);
 			}
 			selstmt.close();
 		}
 	}		
 	
-	public void insert(Faculty newFaculty) throws SQLException {
-		String insertsql = "insert into Faculty values(?, ?, ?, ?, ?, ?)";
+	public void addFaculty(Faculty newFaculty) throws SQLException {
+		FacultyList.add(newFaculty);
+		String insertsql = "insert into Faculty (Faculty_ID, Name, Age, CNF_No, Subject) values (?, ?, ?, ?, ?)";
 		PreparedStatement insstmt = con.prepareStatement(insertsql);
 		int col = 1;
 		insstmt.setInt(col++, newFaculty.getFacultyId());
 		insstmt.setString(col++, newFaculty.getFacultyName());
 		insstmt.setString(col++, newFaculty.getFacultyAge());
-		insstmt.setString(col++, newFaculty.getFacultyUsername());
-		insstmt.setString(col++, newFaculty.getFacultyName() + newFaculty.getFacultyAge());
 		insstmt.setInt(col++, newFaculty.getCnfno());
+		insstmt.setString(col++, newFaculty.getSubject());
 		insstmt.executeUpdate();
 		insstmt.close();
 	}
 	
-	public void update(int id, String name, String age) throws SQLException {
+	public void update(int id, String name, String age, String sub) throws SQLException {
 		
-		String updatesql = "update Faculty set Name = ?, Age = ? where Faculty_ID = ?";
+		String updatesql = "update Faculty set Name = ?, Age = ?, Subject = ? where Faculty_ID = ?";
 		PreparedStatement updstmt = con.prepareStatement(updatesql);
 		int col = 1;
 		updstmt.setString(col++, name);
 		updstmt.setString(col++, age);
 		updstmt.setInt(col++, id);
+		updstmt.setString(col++, sub);
 		updstmt.executeUpdate();
 		updstmt.close();
 	}
@@ -158,11 +154,12 @@ public class FacultyDatabase {
 		return true;
 	}
 	
-	public void updateFacultybyID(int id, String name, String age) throws SQLException {
+	public void updateFacultybyID(int id, String name, String age,String sub) throws SQLException {
 		Faculty faculty = getFacultybyID(id);
 		faculty.setFacultyName(name);
 		faculty.setFacultyAge(age);
-		update(id,name,age);
+		faculty.setSubject(sub);
+		update(id,name,age,sub);
 	}
 	
 	public void deleteFacultybyID(int id) {

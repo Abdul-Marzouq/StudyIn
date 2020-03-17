@@ -30,8 +30,9 @@ public class FacultyController {
 		
 		String name = e.getName();
 		String age = e.getAge();
+		String sub = e.getSubject();
 		
-		Faculty faculty = new Faculty(db.get_lastID()+1, name, age, "");
+		Faculty faculty = new Faculty(db.get_lastID()+1, name, age, sub);
 		
 		try {
 			db.addFaculty(faculty);
@@ -102,9 +103,9 @@ public class FacultyController {
 		return db.getFacultybyID(id);
 	}
 	
-	public void updateFacultybyID(int id, String name, String age) {
+	public void updateFacultybyID(int id, String name, String age,String sub) {
 		try {
-			db.updateFacultybyID(id,name,age);
+			db.updateFacultybyID(id,name,age,sub);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

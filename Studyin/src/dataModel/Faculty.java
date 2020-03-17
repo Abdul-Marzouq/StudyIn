@@ -14,8 +14,17 @@ public class Faculty {
 	private String SQ_Answer;
 	private boolean Account_Status;
 	private int cnfno;
+	private String Subject;
 	
 	
+	public String getSubject() {
+		return Subject;
+	}
+
+	public void setSubject(String subject) {
+		Subject = subject;
+	}
+
 	public int getCnfno() {
 		return cnfno;
 	}
@@ -48,17 +57,16 @@ public class Faculty {
 		SQ_Answer = sQ_Answer;
 	}
 
-	public Faculty(int id,String name, String age, String username) {
+	public Faculty(int id,String name, String age, String sub) {
 		Random rand = new Random();
 		this.FacultyId = id;
 		this.FacultyAge = age;
 		this.FacultyName = name;
-		this.FacultyUsername = username;
-		this.FacultyPassword = name + age;
+		this.Subject = sub;
 		this.cnfno = rand.nextInt(1000);
 	}
 	
-	public Faculty(int id,String name, String age, String username,String password,int sqno,String sqans,int cnfno,boolean stat) {
+	public Faculty(int id,String name, String age, String username,String password,int sqno,String sqans,int cnfno,boolean stat, String sub) {
 		this.FacultyId = id;
 		this.FacultyAge = age;
 		this.FacultyName = name;
@@ -68,6 +76,7 @@ public class Faculty {
 		this.SQ_Answer = sqans;
 		this.cnfno = cnfno;
 		this.Account_Status = stat;
+		this.Subject = sub;
 	}
 	
 	public Faculty() {

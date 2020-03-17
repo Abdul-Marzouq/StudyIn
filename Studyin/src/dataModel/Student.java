@@ -48,13 +48,11 @@ public class Student {
 		SQ_Answer = sQ_Answer;
 	}
 
-	public Student(int id,String name, String age, String username) {
+	public Student(int id,String name, String age) {
 		Random rand = new Random();
 		this.StudentId = id;
 		this.StudentAge = age;
 		this.StudentName = name;
-		this.StudentUsername = username;
-		this.StudentPassword = name + age;
 		this.cnfno = rand.nextInt(1000);
 	}
 	

@@ -9,7 +9,7 @@ import dataModel.Faculty;
 public class AdminFacultyShowTableModel extends AbstractTableModel {
 	
 	private List<Faculty> db;
-	private String[] colnames = {"Faculty_ID", "Name", "Age"};
+	private String[] colnames = {"Faculty_ID", "Name", "Age", "Subject"};
 	
 	public AdminFacultyShowTableModel() {
 		
@@ -28,9 +28,8 @@ public class AdminFacultyShowTableModel extends AbstractTableModel {
 		return db.size();
 	}
 
-
 	public int getColumnCount() {
-		return 3;
+		return 4;
 	}
 
 	public Object getValueAt(int rowIndex, int columnIndex) {
@@ -42,6 +41,8 @@ public class AdminFacultyShowTableModel extends AbstractTableModel {
 			return faculty.getFacultyName();
 		case 2:
 			return faculty.getFacultyAge();
+		case 3:
+			return faculty.getSubject();
 		}
 		return null;
 		

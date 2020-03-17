@@ -48,7 +48,7 @@ public class AdminFacultyUpdatePanel extends JPanel{
 		
 		ausfp.setFormListener(new FormListener() {
 			public void FormEventOccurred(FormEvent e) {
-				facultyController.updateFacultybyID(faculty.getFacultyId(),e.getName(),e.getAge());
+				facultyController.updateFacultybyID(faculty.getFacultyId(),e.getName(),e.getAge(),e.getSubject());
 				clickListener.clickedNum(100);
 				add(ausicp, BorderLayout.CENTER);
 				ausicp.setVisible(true);

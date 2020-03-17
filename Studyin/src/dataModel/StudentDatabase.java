@@ -85,14 +85,12 @@ public class StudentDatabase {
 	}		
 	
 	public void insert(Student newStudent) throws SQLException {
-		String insertsql = "insert into Student values(?, ?, ?, ?, ?, ?)";
+		String insertsql = "insert into Student (Student_ID, Name, Age, CNF_No) values(?, ?, ?, ?)";
 		PreparedStatement insstmt = con.prepareStatement(insertsql);
 		int col = 1;
 		insstmt.setInt(col++, newStudent.getStudentId());
 		insstmt.setString(col++, newStudent.getStudentName());
 		insstmt.setString(col++, newStudent.getStudentAge());
-		insstmt.setString(col++, newStudent.getStudentUsername());
-		insstmt.setString(col++, newStudent.getStudentName() + newStudent.getStudentAge());
 		insstmt.setInt(col++, newStudent.getCnfno());
 		insstmt.executeUpdate();
 		insstmt.close();

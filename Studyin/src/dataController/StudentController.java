@@ -31,7 +31,7 @@ public class StudentController {
 		String name = e.getName();
 		String age = e.getAge();
 		
-		Student student = new Student(db.get_lastID()+1, name, age, "");
+		Student student = new Student(db.get_lastID()+1, name, age);
 		
 		try {
 			db.addStudent(student);

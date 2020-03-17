@@ -15,7 +15,7 @@ public class AdminFacultyShowTablePanel extends JPanel {
 	private JTable tableFacultys;
 	private AdminFacultyShowTableModel tableModel;
 	private ClickListener clickListener;
-	private String[] colnames = {"Faculty_ID", "Name", "Age"};
+	private String[] colnames = {"Faculty_ID", "Name", "Age", "Subject"};
 	
 	public AdminFacultyShowTablePanel() {
 		 

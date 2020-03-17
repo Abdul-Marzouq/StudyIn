@@ -24,6 +24,8 @@ public class AdminFacultyUpdateFormPanel extends JPanel{
 	private JTextField nameField;
 	private JLabel ageLabel;
 	private JTextField ageField;
+	private JLabel subLabel;
+	private JTextField subField;
 	private JButton updateAccountButton;
 	private FormListener formListener;
 	private ClickListener clickListener;
@@ -40,6 +42,8 @@ public class AdminFacultyUpdateFormPanel extends JPanel{
 		nameField = new JTextField(20);
 		ageLabel = new JLabel("Age: ");
 		ageField = new JTextField(10);
+		subLabel = new JLabel("Subject: ");
+		subField = new JTextField(15);
 		updateAccountButton = new JButton("Update Account");
 	
 		Border innerBorder = BorderFactory.createTitledBorder("Update Faculty Account");
@@ -51,8 +55,9 @@ public class AdminFacultyUpdateFormPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				String name  = nameField.getText();
 				String age = ageField.getText(); 
+				String sub = subField.getText(); 
 				
-				FormEvent event = new FormEvent(this, name, age);
+				FormEvent event = new FormEvent(this, name, age,sub);
 				
 				if(formListener != null) {
 					formListener.FormEventOccurred(event);
@@ -90,13 +95,27 @@ public class AdminFacultyUpdateFormPanel extends JPanel{
 		gc.gridy = 1;
 		gc.anchor = GridBagConstraints.LINE_START;
 		add(ageField, gc);
-
+		
 ////////////////////Row 3//////////////////////////////////
+		gc.weightx = 1;
+		gc.weighty = 0.1;
+
+		gc.gridx = 0;	
+		gc.gridy = 2;
+		gc.anchor = GridBagConstraints.LINE_END;
+		add(subLabel, gc);
+
+		gc.gridx = 1;
+		gc.gridy = 2;
+		gc.anchor = GridBagConstraints.LINE_START;	
+		add(subField, gc);
+
+////////////////////Row 4//////////////////////////////////
 		gc.weightx = 1;
 		gc.weighty = 2;
 
 		gc.gridx = 1;
-		gc.gridy = 2;
+		gc.gridy = 3;
 		gc.anchor = GridBagConstraints.CENTER;
 		add(updateAccountButton, gc);
 	}

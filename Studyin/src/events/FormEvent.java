@@ -8,6 +8,7 @@ public class FormEvent extends EventObject{
 	private String age;
 	private String username;
 	private String pwd;
+	private String subject;
 	
 	public FormEvent(Object source) {
 		super(source);
@@ -21,6 +22,25 @@ public class FormEvent extends EventObject{
 		this.age = age;
 	}
 	
+	public FormEvent(Object source, String name, String age, String sub) {
+		super(source);
+		
+		this.name = name;
+		this.age = age;
+		this.subject = sub;
+	}
+	
+	
+	public String getSubject() {
+		return subject;
+	}
+
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+
 	public String getName() {
 		return name;
 	}
